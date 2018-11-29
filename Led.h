@@ -5,13 +5,13 @@
 
 class Led
 {
-public:
-  void Init(int pin); //pin al que está conectado el led
-  void Encender() const;
-  void Apagar() const;
+  public:
+    void Init(int pin); //pin al que está conectado el led
+    void Encender() const;
+    void Apagar() const;
 
-private:
-  int _pin;
+  private:
+    int _pin;
 };
 
 #endif
