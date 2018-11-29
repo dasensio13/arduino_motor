@@ -1,44 +1,38 @@
 #include "Motor.h"
 #include "Led.h"
 
+int PIN_MOTOR = 12;
+
 Motor motor;
 Led led;
 
 void setup() {
-   motor.Init(12);
-   led.Init(LED_BUILTIN);
+  motor.Init(PIN_MOTOR, true);
+  led.Init(LED_BUILTIN);
 }
 
 void loop() {
-  motor.Parar();
+  led.Encender();
+  motor.Adelante();
   delay(1000);
 
-  led.Encender();
   motor.Adelante(10);
   delay(1000);
-  motor.Adelante(20);
-  delay(3000);
-  motor.Adelante(30);
-  delay(3000);
-  motor.Adelante(40);
+
+  motor.AdelanteDirecto(10);
   delay(1000);
-  motor.Adelante(50);
+
+  motor.Atras();
   delay(1000);
-  motor.Adelante(60);
+
+  motor.Atras(10);
   delay(1000);
-  motor.Adelante(70);
+
+  motor.AtrasDirecto(10);
   delay(1000);
-  motor.Adelante(80);
-  delay(1000);
-  motor.Adelante(90);
-  delay(1000);
-  motor.Adelante(100);
-  delay(1000);
+
   led.Apagar();
-
   motor.Parar();
-  delay(1000);
+  delay(10000);
 
-  motor.Atras(50);
-  delay(1000);
 }
