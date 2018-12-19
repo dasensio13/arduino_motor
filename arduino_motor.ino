@@ -14,25 +14,30 @@ void setup() {
 void loop() {
   led.Encender();
   motor.Adelante();
-  delay(1000);
+  delay(500);
 
   motor.Adelante(10);
-  delay(1000);
+  delay(500);
 
   motor.AdelanteDirecto(10);
-  delay(1000);
+  delay(500);
 
   motor.Atras();
-  delay(1000);
+  delay(500);
 
   motor.Atras(10);
-  delay(1000);
+  delay(500);
 
   motor.AtrasDirecto(10);
-  delay(1000);
+  delay(500);
+
+  motor.Velocidad(50);
+  delay(500);
+  
+  motor.Velocidad(-50);
+  delay(500);
 
   led.Apagar();
   motor.Parar();
-  delay(10000);
-
+  delay(5000);
 }

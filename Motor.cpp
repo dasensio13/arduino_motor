@@ -9,29 +9,25 @@ int ANGULO_STOP = 90;
 int VELOCIDAD_MAX = 100;
 int VELOCIDAD_MIN = 0;
 
-int velocidadToAngulo(int velocidad) {
+int Motor::velocidadToAngulo(int velocidad) {
   return map(velocidad, VELOCIDAD_MIN, VELOCIDAD_MAX, ANGULO_MIN, ANGULO_STOP);
 }
 
-void Motor::Init(int pin)
-{
+void Motor::Init(int pin) {
   this->_servo.attach(pin);
   this->_invertido = false;
 }
 
-void Motor::Init(int pin, bool invertido)
-{
+void Motor::Init(int pin, bool invertido) {
   this->_servo.attach(pin);
   this->_invertido = invertido;
 }
 
-void Motor::Parar() const
-{
+void Motor::Parar() const {
   _servo.write(ANGULO_STOP);
 }
 
-void Motor::AdelanteDirecto(int velocidad) const
-{
+void Motor::AdelanteDirecto(int velocidad) const {
   if (velocidad >= VELOCIDAD_MIN and velocidad <= VELOCIDAD_MAX) {
     _servo.write(ANGULO_STOP + velocidadToAngulo(velocidad));
   } else {
@@ -39,13 +35,7 @@ void Motor::AdelanteDirecto(int velocidad) const
   }
 }
 
-void Motor::Adelante() const
-{
-  Adelante(VELOCIDAD_MAX);
-}
-
-void Motor::Adelante(int velocidad) const
-{
+void Motor::Adelante(int velocidad) const {
   if (_invertido) {
     AtrasDirecto(velocidad);
   } else {
@@ -53,8 +43,11 @@ void Motor::Adelante(int velocidad) const
   }
 }
 
-void Motor::AtrasDirecto(int velocidad) const
-{
+void Motor::Adelante() const {
+  Adelante(VELOCIDAD_MAX);
+}
+
+void Motor::AtrasDirecto(int velocidad) const {
   if (velocidad >= VELOCIDAD_MIN and velocidad <= VELOCIDAD_MAX) {
     _servo.write(ANGULO_STOP - velocidadToAngulo(velocidad));
   } else {
@@ -62,16 +55,24 @@ void Motor::AtrasDirecto(int velocidad) const
   }
 }
 
-void Motor::Atras() const
-{
-  Atras(VELOCIDAD_MAX);
-}
-
-void Motor::Atras(int velocidad) const
-{
+void Motor::Atras(int velocidad) const {
   if (_invertido) {
     AdelanteDirecto(velocidad);
   } else {
     AtrasDirecto(velocidad);
+  }
+}
+
+void Motor::Atras() const {
+  Atras(VELOCIDAD_MAX);
+}
+
+void Motor::Velocidad(int velocidad) const {
+  if (velocidad > 0) {
+    Adelante(velocidad);
+  } else if (velocidad < 0) {
+    Atras(abs(velocidad));
+  } else {
+    Parar();
   }
 }

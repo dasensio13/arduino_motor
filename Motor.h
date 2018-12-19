@@ -15,10 +15,12 @@ class Motor
     void Atras() const;
     void Atras(int velocidad) const; //velocidad de 0 a 100
     void AtrasDirecto(int velocidad) const;
+    void Velocidad(int velocidad) const; //velocidad de -100 a 100
 
   private:
     Servo _servo;
     bool _invertido;
+    int velocidadToAngulo(int velocidad);
 };
 
 #endif
